@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trading Dashboard</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#0b1020;
+  color:#fff;
+  font-family:Arial,sans-serif;
+}
+.container{
+  max-width:520px;
+  margin:auto;
+  padding:16px;
+}
+h1{margin:5px 0;font-size:24px}
+.sub{color:#8993aa;margin-bottom:18px}
+
+.card{
+  background:#151c30;
+  border:1px solid #26304a;
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:12px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.box{
+  background:#10172a;
+  padding:14px;
+  border-radius:14px;
+}
+
+.label{
+  color:#8993aa;
+  font-size:13px;
+}
+
+.value{
+  font-size:21px;
+  font-weight:bold;
+  margin-top:6px;
+}
+
+.green{color:#35d07f}
+.red{color:#ff637b}
+.blue{color:#78a9ff}
+
+.active{
+  border:1px solid #315b9c;
+}
+
+.trade-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.status{
+  background:#183d2d;
+  color:#35d07f;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.pnl{
+  text-align:center;
+  margin:18px 0;
+}
+
+.pnl-money{
+  font-size:38px;
+  font-weight:bold;
+}
+
+.pnl-percent{
+  font-size:18px;
+  margin-top:5px;
+}
+
+.details{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.detail{
+  background:#10172a;
+  padding:11px;
+  border-radius:12px;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:13px;
+  background:#315b9c;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📊 لوحة التداول</h1>
+<div class="sub">الحساب الحالي • MT5</div>
+
+<!-- الرصيد -->
+<div class="grid">
+  <div class="box">
+    <div class="label">الرصيد</div>
+    <div class="value">$1,000.00</div>
+  </div>
+
+  <div class="box">
+    <div class="label">Equity</div>
+    <div class="value" id="equity">$1,012.40</div>
+  </div>
+</div>
+
+<br>
+
+<!-- الصفقة النشطة -->
+<div class="card active">
+
+  <div class="trade-title">
+    <b>⚡ الصفقة النشطة</b>
+    <span class="status" id="status">مفتوحة</span>
+  </div>
+
+  <div class="pnl">
+    <div class="pnl-money green" id="profit">
+      +$12.40
+    </div>
+
+    <div class="pnl-percent green" id="percent">
+      +1.24%
+    </div>
+  </div>
+
+  <div class="details">
+
+    <div class="detail">
+      <div class="label">نوع الصفقة</div>
+      <b>شراء</b>
+    </div>
+
+    <div class="detail">
+      <div class="label">اللوت</div>
+      <b>0.01</b>
+    </div>
+
+    <div class="detail">
+      <div class="label">سعر الدخول</div>
+      <b>1.10000</b>
+    </div>
+
+    <div class="detail">
+      <div class="label">السعر الحالي</div>
+      <b id="price">1.10124</b>
+    </div>
+
+    <div class="detail">
+      <div class="label">وقف الخسارة</div>
+      <b>1.09800</b>
+    </div>
+
+    <div class="detail">
+      <div class="label">جني الربح</div>
+      <b>1.10500</b>
+    </div>
+
+  </div>
+</div>
+
+<!-- الإحصائيات -->
+<div class="grid">
+
+  <div class="box">
+    <div class="label">ربح اليوم</div>
+    <div class="value green">+$35</div>
+    <div class="label">+3.50%</div>
+  </div>
+
+  <div class="box">
+    <div class="label">ربح الأسبوع</div>
+    <div class="value green">+$80</div>
+    <div class="label">+8.00%</div>
+  </div>
+
+  <div class="box">
+    <div class="label">ربح الشهر</div>
+    <div class="value green">+$150</div>
+    <div class="label">+15.00%</div>
+  </div>
+
+  <div class="box">
+    <div class="label">توقع 3 أشهر</div>
+    <div class="value blue">$1,520</div>
+    <div class="label">تقديري</div>
+  </div>
+
+</div>
+
+<br>
+
+<!-- زر تجريبي -->
+<div class="card">
+  <b>🧪 اختبار الصفقة</b>
+  <p class="label">
+    هذا الاختبار يحاكي تغير الربح والخسارة حتى نجهز الربط الحقيقي مع MT5.
+  </p>
+
+  <button onclick="toggleTrade()">
+    فتح / إغلاق الصفقة التجريبية
+  </button>
+</div>
+
+<div class="sub" style="text-align:center">
+البيانات الحالية تجريبية — سيتم ربط MT5 لاحقًا.
+</div>
+
+</div>
+
+<script>
+
+let profit = 12.40;
+let open = true;
+
+function updateTrade(){
+
+  if(!open) return;
+
+  profit += (Math.random()-0.5)*4;
+
+  let percentage = profit / 1000 * 100;
+
+  let profitElement = document.getElementById("profit");
+  let percentElement = document.getElementById("percent");
+  let equityElement = document.getElementById("equity");
+
+  profitElement.innerText =
+    (profit >= 0 ? "+$" : "-$") +
+    Math.abs(profit).toFixed(2);
+
+  percentElement.innerText =
+    (percentage >= 0 ? "+" : "") +
+    percentage.toFixed(2) + "%";
+
+  equityElement.innerText =
+    "$" + (1000 + profit).toFixed(2);
+
+  if(profit >= 0){
+    profitElement.className="pnl-money green";
+    percentElement.className="pnl-percent green";
+  }else{
+    profitElement.className="pnl-money red";
+    percentElement.className="pnl-percent red";
+  }
+}
+
+function toggleTrade(){
+
+  open = !open;
+
+  document.getElementById("status").innerText =
+    open ? "مفتوحة" : "مغلقة";
+
+  if(!open){
+    document.getElementById("profit").innerText =
+      (profit >= 0 ? "+$" : "-$") +
+      Math.abs(profit).toFixed(2);
+  }
+}
+
+setInterval(updateTrade,1000);
+
+</script>
+
+</body>
+  </html>
